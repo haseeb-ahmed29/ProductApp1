@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ProductApp.Models.Product;
+@{
+    ViewData["Title"] = "Edit Product"; // set page title
+}
+
+<div class="container mt-4" style="max-width:600px">
+    <h2>Edit Product</h2>
+    <hr />
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <input type="hidden" asp-for="ImagePath" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @* Product Name Field *@
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" placeholder="Enter product name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product Image</label>
+            <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+        </div>
+        @* Image Selection *@
+        <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <div class="mb-2">
+                    @* Display Current Image *@
+                    <img src="/images/products/@Model.ImagePath"
+                         style="max-height:150px; border-radius:6px;" alt="Current" />
+                </div>
+            }
+            <input type="file" name="imageFile" class="form-control" accept="image/*" />
+
+            <small class="text-muted">Leave blank to keep the current image.</small>
+
+        </div>
+        <button type="submit" class="btn btn-warning">Update Product</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+  
