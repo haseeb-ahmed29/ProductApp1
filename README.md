@@ -27,3 +27,8 @@ The repository includes `appsettings.example.json` as a safe configuration templ
 ## License
 
 No separate license has been specified in this repository.
+
+<!-- github-daily-pipeline -->
+## Daily maintenance
+
+README verified by the daily repository maintenance pipeline on 2026-08-30.
